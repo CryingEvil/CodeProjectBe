@@ -16,13 +16,13 @@ app.listen(3001, () =>
     console.log("running on port 3001"));
 
 app.get('/', (req, res) => {
-    const sqlState = "INSERT INTO favorite (title) VALUE ('Ini Test Masuk Database pakai server')";
+    const sqlState = "SELECT * FROM favorite";
     db.query(sqlState, (err, rslt) => {
         if (err) {
             res.send(err.message);
         }
         else {
-            res.send('Berhasil');
+            res.send(rslt);
         }
     })
 });
@@ -38,6 +38,18 @@ app.post('/save',(req,res)=>{
         }
         else {
             res.send('Berhasil');
+        }
+    })
+})
+app.post('/delete',(req,res)=>{
+    const bookId = req.body.bookId;
+    const sqlState = "DELETE FROM favorite WHERE ='" +bookId+"'";
+    db.query(sqlState, (err, rslt) => {
+        if (err) {
+            res.send(err.message);
+        }
+        else {
+            res.send('result');
         }
     })
 })
