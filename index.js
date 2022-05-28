@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = mySql.createPool({
     host: "localhost",
+    //port:"8082",
     user: "root",
     database: "library"
 })
@@ -16,6 +17,7 @@ app.listen(3001, () =>
     console.log("running on port 3001"));
 
 app.get('/', (req, res) => {
+    res.send("Your Are Connected With Server");
     const sqlState = "SELECT * FROM favorite";
     db.query(sqlState, (err, rslt) => {
         if (err) {
@@ -35,6 +37,7 @@ app.post('/save',(req,res)=>{
     db.query(sqlState, (err, rslt) => {
         if (err) {
             res.send(err.message);
+            console.log(err.message);
         }
         else {
             res.send('Berhasil');

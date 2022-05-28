@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  app:
+    build: 
+      context: .
+    volumes:
+      - .:\project-be-1
+    ports:
+      - 3001:3001
+    image: app:project_b1
+    container_name: project_be_container
+    command: npm run devStart
